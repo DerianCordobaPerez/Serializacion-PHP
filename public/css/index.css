@@ -1,0 +1,29 @@
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+.header {
+    width: 100%;
+    padding: 25px;
+    background: #005cbf;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .6);
+}
+
+.title {
+    color: #fff;
+    font-size: 25px;
+}
+
+.image-shadow {
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, .5));
+    transition: .4s ease all;
+}
+
+.image-shadow:hover {
+    filter: drop-shadow(0 15px 26px rgba(0, 0, 0, .8));
+}
+
+.image {
+    width: 200px;
+    height: 200px;
+}
