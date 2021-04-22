@@ -1,2 +1,2 @@
 <?php
-    define('FILE_SERIALIZE', 'StudentSerialize.store');
+    define('FILE_SERIALIZE', 'student_serialize.store');

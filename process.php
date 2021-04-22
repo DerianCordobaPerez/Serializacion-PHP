@@ -3,6 +3,7 @@
     include_once 'constants/constants.php';
     include_once 'helpers/serialize_unserialize.php';
     include_once 'components/Title.php';
+    include_once 'components/Button.php';
     $students = unserialize_content();
 
     $target = 'uploads/'.basename($_FILES['photo']['name']);
@@ -36,5 +37,6 @@
         else
             Title::title_with_strong_void('h3', 'No se agregado el estudiante', 'text-muted');
     }
+    sleep(1);
     header("Location: https://".$_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['PHP_SELF']), '/\\')."/index.php");
     exit;

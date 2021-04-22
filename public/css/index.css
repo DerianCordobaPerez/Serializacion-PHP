@@ -1,9 +1,9 @@
 * {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 body {
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(194,170,172,1) 35%, rgba(126,66,105,1) 87%);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(71, 66, 126, 1) 100%);
 }
 
 .header {
@@ -16,6 +16,28 @@ body {
 .title {
     color: #fff;
     font-size: 25px;
+}
+
+.link {
+    color: #fff;
+    text-underline: none;
+}
+
+.link:hover {
+    color: #000;
+    text-underline: none;
+}
+
+.text {
+    letter-spacing: 1px;
+    color: #2f3330;
+    font-size: 18px;
+}
+
+.text-strong {
+    color: #000;
+    font-size:18px;
+    font-weight: bold;
 }
 
 .image-shadow {

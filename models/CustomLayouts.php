@@ -11,10 +11,17 @@ class CustomLayouts {
         include_once 'components/Title.php';
         include_once 'components/Span.php';
         include_once 'components/Button.php';
+        include_once 'components/Html.php';
         include_once 'models/Student.php';
     }
 
-    public static function get_instance() {
+
+    /**
+     * Devuelve una unica instancia de la clase aplicando el patron singleton
+     * @param null
+     * @return mixed
+     */
+    public static function get_instance(): mixed {
         $class = static::class;
         if(!isset(self::$instance[$class]))
             self::$instance[$class] = new static();
@@ -32,12 +39,10 @@ class CustomLayouts {
             self::show_photo_student($student->photo),
             self::get_array_strings($student),
             array(
-                Button::button("btn btn-warning d-block mx-auto", "editButton", "Editar"),
-                Button::button("btn btn-danger d-block mx-auto my-4", "deleteButton", "Eliminar")
+                Button::button("btn btn-warning d-block mx-auto", "editButton", "<a class='link nav-link' href='edit_person.php?license=$student->license'>Editar</a>"),
+                Button::button("btn btn-danger d-block mx-auto my-4", "deleteButton", "<a class='link nav-link' href='deletePerson.php?license=$student->license'>Borrar</a>")
             ),
         );
-
-        self::show_header_titles(array("Imagen", "Informacion", "Acciones"));
         // Maquetacion del html mediante funciones
         Divs::open_div('row');
         foreach($content as $item) {
@@ -79,7 +84,7 @@ class CustomLayouts {
      * @return string
      */
     private static function show_information_student(string $title, string $attribute): string {
-            return "<p><strong>$title: </strong> $attribute</p>";
+            return "<p class='text'><strong class='text-strong'>$title: </strong> $attribute</p>";
     }
 
     /**
@@ -96,21 +101,14 @@ class CustomLayouts {
     }
 
     /**
-     * @param Student|null $student
-     */
-    public static function show_modal(Student|null $student): void {
-        self::show_form($student);
-    }
-
-    /**
      * Maqueta el formulario de registro o edicion
      * @param $file
      * @param Student|null $student
      * @return void
      */
     public static function show_form($file, Student|null $student = null): void {
-        echo Title::title_with_strong('h3', 'Estudiantes');
-        Title::title_void('h5', 'Rellene el formulario con los datos de estudiante');
+        echo Title::title_with_strong('h3', (!$student ? 'Agregar' : 'Editar').' Estudiante');
+        Title::title_void('h5', !$student ? 'Rellene el formulario con los datos de estudiante' : 'Edite la informacion del usuario '.$student->name);
 
         if($student) $array_student = self::get_array_strings($student, 1);
         $labels = array('Email', 'Name', 'License', 'Age', 'Course', 'Photo');
@@ -121,7 +119,7 @@ class CustomLayouts {
         for($i = 0; $i < count($labels); ++$i) {
             Label::label_void(strtolower($labels[$i]), $labels[$i]);
             Input::input_hidden('id', $student ? $array_student[$i] : 'hidden');
-            Input::input('form-control', $icons[$i], $types[$i], strtolower($labels[$i]), $labels[$i], $student ? $array_student[$i] : '');
+            Input::input('form-control', $icons[$i], $types[$i], strtolower($labels[$i]), $labels[$i], $student ? $array_student[$i] : '', true, $student ? $labels[$i] : '');
         }
 
         Divs::open_div('input-group');
@@ -134,7 +132,7 @@ class CustomLayouts {
 
     private static function get_array_strings(Student $student, $flag = 0): array {
         $information = array();
-        $student_information = array($student->name, $student->email, $student->age, $student->license, $student->course, $student->photo);
+        $student_information = array($student->name, $student->email, $student->license, $student->age, $student->course, $student->photo);
         if($flag) return $student_information;
         for($i = 0; $i < count(self::$titles); ++$i)
             array_push($information, self::show_information_student(self::$titles[$i], $student_information[$i]));
