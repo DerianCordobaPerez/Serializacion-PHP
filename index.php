@@ -1,3 +1,12 @@
+<?php
+    include_once 'models/CustomLayouts.php';
+    include_once 'constants/constants.php';
+    include_once 'helpers/serialize_unserialize.php';
+    CustomLayouts::get_instance();
+
+    $students = unserialize_content();
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -35,8 +44,7 @@
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <?php
-                            include 'helpers/form.php';
-                            show_form('process.php');
+                            CustomLayouts::show_form('process.php');
                         ?>
                     </div>
                 </div>
@@ -51,8 +59,9 @@
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <?php
-                            include 'listStudent.php';
-                            list_students();
+                            CustomLayouts::show_header_titles(array("Imagen", "Informacion", "Acciones"));
+                            foreach ($students as $student)
+                                CustomLayouts::show_full_content($student);
                         ?>
                     </div>
                 </div>
@@ -62,5 +71,7 @@
 
     <!-- BOOTSTRAP JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <!-- ICONS -->
+    <script src="https://kit.fontawesome.com/0496ae07d8.js" crossorigin="anonymous"></script>
 </body>
 </html>
