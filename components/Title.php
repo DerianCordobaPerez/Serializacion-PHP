@@ -1,5 +1,7 @@
 <?php
 class Title {
+    private function __construct(){}
+
     public static function title(string $size, string $title, string $class = ""): string {
         return "<$size class='$class'>$title</$size>";
     }

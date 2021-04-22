@@ -32,11 +32,12 @@ class CustomLayouts {
             self::show_photo_student($student->photo),
             self::get_array_strings($student),
             array(
-                Button::button("btn btn-warning", "editButton", "Editar"),
-                Button::button("btn btn-danger", "deleteButton", "Eliminar")
+                Button::button("btn btn-warning d-block mx-auto", "editButton", "Editar"),
+                Button::button("btn btn-danger d-block mx-auto my-4", "deleteButton", "Eliminar")
             ),
         );
 
+        self::show_header_titles(array("Imagen", "Informacion", "Acciones"));
         // Maquetacion del html mediante funciones
         Divs::open_div('row');
         foreach($content as $item) {
@@ -44,7 +45,11 @@ class CustomLayouts {
                 if(is_array($item)) {
                     foreach($item as $string)
                         echo $string;
-                } else echo $item;
+                } else  {
+                    Divs::open_div('d-grid gap-2');
+                        echo $item;
+                    Divs::close_div();
+                }
             Divs::close_div();
         }
         Divs::close_div();
@@ -98,8 +103,10 @@ class CustomLayouts {
     }
 
     /**
+     * Maqueta el formulario de registro o edicion
      * @param $file
      * @param Student|null $student
+     * @return void
      */
     public static function show_form($file, Student|null $student = null): void {
         echo Title::title_with_strong('h3', 'Estudiantes');
@@ -118,7 +125,7 @@ class CustomLayouts {
         }
 
         Divs::open_div('input-group');
-            Divs::open_div('d-grid gap-2');
+            Divs::open_div('d-grid gap-2 d-md-block');
                 Input::input('btn btn-primary my-2', '', 'submit', 'enviar', '', 'Enviar', false);
             Divs::close_div();
         Divs::close_div();
