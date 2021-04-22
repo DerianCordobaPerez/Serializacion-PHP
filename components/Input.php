@@ -6,4 +6,8 @@ class Input {
             echo "<input class='$class' type='$type' name='$name' placeholder='$placeholder' value='$value' required />";
         Divs::close_div();
     }
+
+    public static function input_hidden($name, $value): void {
+        echo "<input type='hidden' name='$name' value='$value'/>";
+    }
 }

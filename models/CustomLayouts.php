@@ -48,6 +48,7 @@ class CustomLayouts {
             Divs::close_div();
         }
         Divs::close_div();
+        echo "<hr />";
     }
 
     /**
@@ -90,9 +91,9 @@ class CustomLayouts {
     }
 
     /**
-     * @param $student
+     * @param Student|null $student
      */
-    public static function show_modal($student): void {
+    public static function show_modal(Student|null $student): void {
         self::show_form($student);
     }
 
@@ -112,6 +113,7 @@ class CustomLayouts {
         Form::open_form($file, 'post', 'multipart/form-data');
         for($i = 0; $i < count($labels); ++$i) {
             Label::label_void(strtolower($labels[$i]), $labels[$i]);
+            Input::input_hidden('id', $student ? $array_student[$i] : 'hidden');
             Input::input('form-control', $icons[$i], $types[$i], strtolower($labels[$i]), $labels[$i], $student ? $array_student[$i] : '');
         }
 
