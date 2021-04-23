@@ -15,6 +15,8 @@ class CustomLayouts {
         include_once 'components/Image.php';
         include_once 'components/P.php';
         include_once 'components/A.php';
+        include_once 'components/Header.php';
+        include_once 'components/Accordion.php';
         include_once 'models/Student.php';
     }
 

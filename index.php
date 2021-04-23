@@ -1,10 +1,5 @@
 <?php
     include_once 'models/CustomLayouts.php';
-    include_once 'helpers/serialize_unserialize.php';
-    include_once 'components/Html.php';
-    include_once 'components/Divs.php';
-    include_once 'components/Accordion.php';
-    include_once 'components/Header.php';
     include_once 'list_student.php';
     CustomLayouts::get_instance();
 

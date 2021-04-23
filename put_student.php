@@ -8,6 +8,7 @@
         $students = unserialize_content();
         for($i = 0; $i < count($students); ++$i) {
             if($students[$i]->license == $_POST['license']) {
+                unlink('uploads/'.$students[$i]->photo);
                 unset($students[$i]);
                 $students = array_values($students);
                 break;
