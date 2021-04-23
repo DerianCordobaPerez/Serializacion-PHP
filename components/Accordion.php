@@ -3,6 +3,13 @@ class Accordion
 {
     private function __construct() {}
 
+    /**
+     * Inicio del componente acordeon generalizado
+     * @param string $title
+     * @param string $id
+     * @param string $target
+     * @return void
+     */
     public static function open_accordion(string $title, string $id, string $target): void
     {
         include_once 'Divs.php';
@@ -18,6 +25,11 @@ class Accordion
                         <div class='accordion-body'>";
     }
 
+    /**
+     * Final del componente acordeon
+     * @param null
+     * @return void
+     */
     public static function close_accordion(): void {
         include_once 'Divs.php';
                     Divs::close_div();

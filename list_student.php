@@ -4,6 +4,11 @@
     include_once 'components/Divs.php';
     include_once 'helpers/serialize_unserialize.php';
 
+    /**
+     * Listado de estudiantes
+     * @param null
+     * @return void
+     */
     function list_students(): void {
         $students = unserialize_content();
 

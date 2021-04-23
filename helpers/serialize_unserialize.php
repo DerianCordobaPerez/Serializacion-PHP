@@ -1,4 +1,10 @@
 <?php
+
+    /**
+     * Serializacion y escritura del fichero
+     * @param $students
+     * @return bool
+     */
     function serialize_content($students): bool {
         try {
             file_put_contents('student_serialize.store', serialize($students));
@@ -9,6 +15,11 @@
         }
     }
 
+    /**
+     * Deserializacion del fichero
+     * @param null
+     * @return array
+     */
     function unserialize_content(): array {
         $students = null;
         try {

@@ -6,6 +6,7 @@
     include_once 'components/Title.php';
     include_once 'components/Button.php';
 
+    // Validacion y agregado de un nuevo estudiante
     $upload = validation_image();
     if(!$upload)
         echo 'ERROR / Ocurrio un problema al subir la imagen';

@@ -5,6 +5,7 @@
     include_once 'helpers/upload_image.php';
     include_once 'helpers/redirect_page.php';
 
+    // Actualizacion de un estudiante editado
     $upload = validation_image();
     if(!$upload)
         echo 'ERROR / Ocurrio un problema al subir la imagen';

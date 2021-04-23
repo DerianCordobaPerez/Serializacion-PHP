@@ -4,6 +4,7 @@
     include_once 'helpers/redirect_page.php';
     include_once 'components/Title.php';
 
+    // Borrado de un estudiante
     if(isset($_POST['delete'])) {
         $students = unserialize_content();
         for($i = 0; $i < count($students); ++$i) {

@@ -1,5 +1,6 @@
 <?php
 class CustomLayouts {
+    // Titulos de las propiedades del estudiante
     private static array|null $titles = array('Nombre', 'Email', 'Edad', 'Carnet', 'Curso');
     private static array $instance = [];
 
@@ -133,6 +134,96 @@ class CustomLayouts {
         Form::close_form();
     }
 
+    /**
+     * Maquetacion para la pagina index
+     * @param null
+     * @return void
+     */
+    public static function show_index(): void {
+        Html::open_html('Practica #03');
+            Header::header(array('Practica', 'Procesamiento de Formularios'), true);
+            Divs::open_div('container');
+                Accordion::open_accordion('Formulario Estudiantes', 'headingOne', 'collapseOne');
+                    self::show_form('process.php');
+                Accordion::close_accordion();
+
+                Accordion::open_accordion('Listado Estudiantes', 'headingTwo', 'collapseTwo');
+                    list_students();
+                Accordion::close_accordion();
+            Divs::close_div();
+        Html::close_html();
+    }
+
+    /**
+     * Maquetacion para la pagina de edicion
+     * @param Student $student
+     * @return void
+     */
+    public static function show_edit_student(Student $student): void {
+        Html::open_html('Edit: '.$student->name);
+            Divs::open_div('container bg-light my-4 p-4');
+                self::show_form('update.php', $student);
+                Divs::open_div('d-grid gap-2');
+                    echo Button::button('btn btn-warning', '', '<a class="link" href="index.php">Regresar al inicio</a>');
+                Divs::close_div();
+            Divs::close_div();
+        Html::close_html();
+    }
+
+    /**
+     * Maquetacion para el borrado de un estudiante
+     * @param Student $student
+     * @param array $titles
+     * @param array $array_information
+     * @return void
+     */
+    public static function show_delete_student(Student $student, array $titles, array $array_information): void {
+        Html::open_html('Delete '.$student->name);
+            Form::open_form('put_student.php', 'post', 'multipart/form-data');
+                Input::input_hidden('license', $student->license);
+                Divs::open_div('container bg-light my-4 p-4');
+                    Divs::open_div_role('alert alert-warning', 'alert');
+                        Title::title_with_strong_void('h3', 'Estas seguro que desea eliminar a '.$student->name.'?', 'text-center');
+                    Divs::close_div();
+
+                    Divs::open_div('row my-4');
+                        Divs::open_div('col-md-2');
+                    Divs::close_div();
+
+                    Divs::open_div('col-md-4');
+                        echo Title::title_with_strong('h3', 'Informacion', '');
+                        for($i = 0; $i < count($titles); ++$i)
+                            echo CustomLayouts::show_information_student($titles[$i], $array_information[$i]);
+                    Divs::close_div();
+
+                    Divs::open_div('col-md-6');
+                        echo Title::title_with_strong('h3', 'Imagen', 'text-center');
+                    Divs::open_div('d-grid gap-2');
+
+                    Image::image('uploads/'.$student->photo, 'image-shadow image mx-auto d-block');
+                        Divs::close_div();
+                    Divs::close_div();
+                Divs::close_div();
+
+                Divs::open_div('row my-4');
+                    Divs::open_div('col'); Divs::close_div();
+                Divs::open_div('col-md-6');
+                echo Input::input_string('btn btn-danger button-width', 'submit', 'delete', 'Si');
+                Divs::close_div();
+                    Divs::open_div('col'); Divs::close_div();
+                Divs::close_div();
+                A::a('text-center nav-link', 'index.php', 'No, volver al inicio');
+                Divs::close_div();
+            Form::close_form();
+        Html::close_html();
+    }
+
+    /**
+     * Obtenemos la informacion del estudiante o un array combinado de los encabezados y los atributos
+     * @param Student $student
+     * @param int $flag
+     * @return array
+     */
     private static function get_array_strings(Student $student, $flag = 0): array {
         $information = array();
         $student_information = array($student->email, $student->name, $student->license, $student->age, $student->course, $student->photo);

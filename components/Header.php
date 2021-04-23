@@ -1,6 +1,13 @@
 <?php
 class Header {
     private function __construct() {}
+
+    /**
+     * Componente header
+     * @param mixed $content
+     * @param bool $with_strong
+     * @return void
+     */
     public static function header(mixed $content, $with_strong = false): void {
         include_once 'Divs.php';
         include_once 'P.php';

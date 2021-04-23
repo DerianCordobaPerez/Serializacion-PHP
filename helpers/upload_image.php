@@ -1,5 +1,10 @@
 <?php
 
+    /**
+     * Validacion sobre la subida de la imagen
+     * @param null
+     * @return bool
+     */
     function validation_image(): bool {
         $upload = true;
 
