@@ -1,5 +1,4 @@
 <?php
-    include 'constants/constants.php';
     include_once 'components/Title.php';
     include_once 'components/Button.php';
     include_once 'components/Divs.php';

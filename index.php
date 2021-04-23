@@ -1,6 +1,5 @@
 <?php
     include_once 'models/CustomLayouts.php';
-    include_once 'constants/constants.php';
     include_once 'helpers/serialize_unserialize.php';
     include_once 'components/Html.php';
     include_once 'components/Divs.php';

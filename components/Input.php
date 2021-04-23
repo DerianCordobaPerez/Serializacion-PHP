@@ -11,6 +11,10 @@ class Input {
         Divs::close_div();
     }
 
+    public static function input_string($class, $type, $name, $value = ''): string {
+        return "<input class='$class' type='$type' name='$name' value='$value' required />";
+    }
+
     public static function input_hidden($name, $value): void {
         echo "<input type='hidden' name='$name' value='$value'/>";
     }

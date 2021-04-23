@@ -1,14 +1,15 @@
 <?php
     include_once 'models/Student.php';
-    include_once 'constants/constants.php';
     include_once 'helpers/serialize_unserialize.php';
+    include_once 'helpers/upload_image.php';
+    include_once 'helpers/redirect_page.php';
     include_once 'components/Title.php';
     include_once 'components/Button.php';
-    include_once 'helpers/upload_image.php';
+
     $upload = validation_image();
     if(!$upload)
         echo 'ERROR / Ocurrio un problema al subir la imagen';
-    else if(move_uploaded_file($_FILES['photo']['tmp_name'], NAME_FILE)) {
+    else if(move_uploaded_file($_FILES['photo']['tmp_name'], 'uploads/'.basename($_FILES['photo']['name']))) {
         $students = unserialize_content();
         $student = new Student(
             $_POST['email'],
@@ -24,6 +25,4 @@
         else
             Title::title_with_strong_void('h3', 'No se agregado el estudiante', 'text-muted');
     }
-    sleep(1);
-    header("Location: https://".$_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['PHP_SELF']), '/\\')."/index.php");
-    exit;
+    redirect();

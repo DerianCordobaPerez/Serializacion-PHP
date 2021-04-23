@@ -12,6 +12,9 @@ class CustomLayouts {
         include_once 'components/Span.php';
         include_once 'components/Button.php';
         include_once 'components/Html.php';
+        include_once 'components/Image.php';
+        include_once 'components/P.php';
+        include_once 'components/A.php';
         include_once 'models/Student.php';
     }
 
@@ -39,8 +42,8 @@ class CustomLayouts {
             self::show_photo_student($student->photo),
             self::get_array_strings($student),
             array(
-                Button::button("btn btn-warning d-block mx-auto", "editButton", "<a class='link nav-link' href='edit_person.php?license=$student->license'>Editar</a>"),
-                Button::button("btn btn-danger d-block mx-auto my-4", "deleteButton", "<a class='link nav-link' href='deletePerson.php?license=$student->license'>Borrar</a>")
+                Button::button("btn btn-warning d-block mx-auto", "editButton", "<a class='link nav-link' href='edit_student.php?license=$student->license'>Editar</a>"),
+                Button::button("btn btn-danger d-block mx-auto my-4", "deleteButton", "<a class='link nav-link' href='delete_student.php?license=$student->license'>Borrar</a>")
             ),
         );
         // Maquetacion del html mediante funciones
@@ -83,7 +86,7 @@ class CustomLayouts {
      * @param string $attribute
      * @return string
      */
-    private static function show_information_student(string $title, string $attribute): string {
+    public static function show_information_student(string $title, string $attribute): string {
             return "<p class='text'><strong class='text-strong'>$title: </strong> $attribute</p>";
     }
 
@@ -118,6 +121,7 @@ class CustomLayouts {
         Form::open_form($file, 'post', 'multipart/form-data');
         for($i = 0; $i < count($labels); ++$i) {
             Label::label_void(strtolower($labels[$i]), $labels[$i]);
+            if($types === 'file') Input::input_hidden('MAX_FILE_SIZE', '1024000');
             Input::input('form-control', $icons[$i], $types[$i], strtolower($labels[$i]), $labels[$i], $student ? $array_student[$i] : '', true, $student ? $labels[$i] : '');
         }
 
