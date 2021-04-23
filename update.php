@@ -22,8 +22,8 @@
                 break;
             }
         }
-        $result = serialize_content($students);
-        if($result)
+
+        if(serialize_content($students))
             Title::title_with_strong_void('h3', 'Se edito correctamente el estudiante', 'text-muted');
         else
             Title::title_with_strong_void('h3', 'No se pudo editar el estudiante', 'text-muted');

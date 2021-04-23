@@ -19,11 +19,13 @@
                     Divs::open_div('col-md-2');
                     Divs::close_div();
                     Divs::open_div('col-md-4');
+                        echo Title::title_with_strong('h3', 'Informacion', '');
                         for($i = 0; $i < count($titles); ++$i)
                             echo CustomLayouts::show_information_student($titles[$i], $array_information[$i]);
                     Divs::close_div();
 
                     Divs::open_div('col-md-6');
+                        echo Title::title_with_strong('h3', 'Imagen', 'text-center');
                         Divs::open_div('d-grid gap-2');
                             Image::image('uploads/'.$student->photo, 'image-shadow image mx-auto d-block');
                         Divs::close_div();

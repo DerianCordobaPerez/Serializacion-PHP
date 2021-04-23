@@ -119,17 +119,17 @@ class CustomLayouts {
         $labels = array('Email', 'Name', 'License', 'Age', 'Course', 'Photo');
         $icons = array('@', "<i class='far fa-user'></i>", "<i class='far fa-id-card'></i>", "18", "<i class='fas fa-graduation-cap'></i>", "<i class='fas fa-images'></i>");
         $types = array('email', 'text', 'text', 'number', 'number', 'file');
+        $values = array("", "maxlength='200'", "maxlength='10'", "min='15' max='50'", "min='1' max='5'", "");
 
         Form::open_form($file, 'post', 'multipart/form-data');
-        for($i = 0; $i < count($labels); ++$i) {
-            Label::label_void(strtolower($labels[$i]), $labels[$i]);
-            if($types === 'file') Input::input_hidden('MAX_FILE_SIZE', '1024000');
-            Input::input('form-control', $icons[$i], $types[$i], strtolower($labels[$i]), $labels[$i], $student ? $array_student[$i] : '', true, $student ? $labels[$i] : '');
-        }
-
-        Divs::open_div('d-grid gap-2');
-            Input::input('btn btn-primary my-2', '', 'submit', 'send', '', 'Enviar', false);
-        Divs::close_div();
+            for($i = 0; $i < count($labels); ++$i) {
+                Label::label_void(strtolower($labels[$i]), $labels[$i]);
+                if($types[$i] === 'file') Input::input_hidden('MAX_FILE_SIZE', '1024000');
+                Input::input('form-control', $icons[$i], $types[$i], strtolower($labels[$i]), $labels[$i], $student ? $array_student[$i] : '', true, $student ? $labels[$i] : '', $values[$i]);
+            }
+            Divs::open_div('d-grid gap-2');
+                Input::input('btn btn-primary my-2 button-width', '', 'submit', 'send', '', 'Enviar', false);
+            Divs::close_div();
         Form::close_form();
     }
 

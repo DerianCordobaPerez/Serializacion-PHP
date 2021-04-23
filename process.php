@@ -20,7 +20,8 @@
             htmlspecialchars(basename($_FILES['photo']['name']))
         );
         array_push($students, $student);
-        if(serialize_content($students))
+        $result = serialize_content($students);
+        if($result)
             Title::title_with_strong_void('h3', 'Se agregado correctamente el estudiante', 'text-muted');
         else
             Title::title_with_strong_void('h3', 'No se agregado el estudiante', 'text-muted');

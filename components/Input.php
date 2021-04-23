@@ -2,11 +2,12 @@
 class Input {
     private function __construct() {}
 
-    public static function input($class, $title_span, $type, $name, $placeholder, $value = '', $exist_span = true, string $license = ""): void {
+    public static function input($class, $title_span, $type, $name, $placeholder, $value = '', $exist_span = true, string $license = "", string $values = ""): void {
         Divs::open_div('input-group');
             if($exist_span) Span::span('input-group-text', $title_span);
             echo "<input class='$class' type='$type' name='$name' ";
-            if($name === 'license' && $license !== "") echo "readonly";
+            if($type == 'number' || $type == 'text') echo $values;
+            if($name == 'license' && $license !== "") echo "readonly";
             echo " placeholder='$placeholder' value='$value' required />";
         Divs::close_div();
     }
