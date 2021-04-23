@@ -118,21 +118,18 @@ class CustomLayouts {
         Form::open_form($file, 'post', 'multipart/form-data');
         for($i = 0; $i < count($labels); ++$i) {
             Label::label_void(strtolower($labels[$i]), $labels[$i]);
-            Input::input_hidden('id', $student ? $array_student[$i] : 'hidden');
             Input::input('form-control', $icons[$i], $types[$i], strtolower($labels[$i]), $labels[$i], $student ? $array_student[$i] : '', true, $student ? $labels[$i] : '');
         }
 
-        Divs::open_div('input-group');
-            Divs::open_div('d-grid gap-2 d-md-block');
-                Input::input('btn btn-primary my-2', '', 'submit', 'enviar', '', 'Enviar', false);
-            Divs::close_div();
+        Divs::open_div('d-grid gap-2');
+            Input::input('btn btn-primary my-2', '', 'submit', 'send', '', 'Enviar', false);
         Divs::close_div();
         Form::close_form();
     }
 
     private static function get_array_strings(Student $student, $flag = 0): array {
         $information = array();
-        $student_information = array($student->name, $student->email, $student->license, $student->age, $student->course, $student->photo);
+        $student_information = array($student->email, $student->name, $student->license, $student->age, $student->course, $student->photo);
         if($flag) return $student_information;
         for($i = 0; $i < count(self::$titles); ++$i)
             array_push($information, self::show_information_student(self::$titles[$i], $student_information[$i]));

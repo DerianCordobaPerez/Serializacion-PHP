@@ -4,25 +4,12 @@
     include_once 'helpers/serialize_unserialize.php';
     include_once 'components/Title.php';
     include_once 'components/Button.php';
-    $students = unserialize_content();
-
-    $target = 'uploads/'.basename($_FILES['photo']['name']);
-    $upload = true;
-    $imageUploadType = strtolower(pathinfo($target, PATHINFO_EXTENSION));
-
-    if(isset($_POST['submit'])) {
-        $value = getimagesize($_FILES['photo']['tmp_name']);
-        if(!$value) $upload = false;
-    }
-
-    if(file_exists($target)) {
-        echo 'Error, la imagen ingresada ya existe';
-        $upload = false;
-    }
-
+    include_once 'helpers/upload_image.php';
+    $upload = validation_image();
     if(!$upload)
         echo 'ERROR / Ocurrio un problema al subir la imagen';
-    else if(move_uploaded_file($_FILES['photo']['tmp_name'], $target)) {
+    else if(move_uploaded_file($_FILES['photo']['tmp_name'], NAME_FILE)) {
+        $students = unserialize_content();
         $student = new Student(
             $_POST['email'],
             $_POST['name'],
