@@ -141,7 +141,7 @@ class CustomLayouts {
      */
     public static function show_index(): void {
         Html::open_html('Practica #03');
-            Header::header(array('Practica', 'Procesamiento de Formularios'), true);
+            Header::header(array('Practica #03', 'Procesamiento de Formularios'), true);
             Divs::open_div('container');
                 Accordion::open_accordion('Formulario Estudiantes', 'headingOne', 'collapseOne');
                     self::show_form('process.php');
